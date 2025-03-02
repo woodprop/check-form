@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Внесение трат</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container h-screen mx-auto flex items-center justify-center">
+        <div class="w-full max-w-xs">
+          <form
+                  class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                  action="https://script.google.com/macros/s/AKfycbxVWlAlL95CIkBJrqcjrzmFeke7FBav_0RH7UN_3t0bWa5Z0LRYOnngxNbHI9jKR_INfw/exec"
+                  method="post"
+          >
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="date">
+                Дата
+              </label>
+              <input name="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="date" type="date">
+            </div>
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                Описание
+              </label>
+              <input name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" placeholder="Описание">
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="seller">
+                Контрагент
+              </label>
+              <input name="seller" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="seller" type="text" placeholder="Контрагент">
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+                Сумма
+              </label>
+              <input name="price" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="number" step=".01" placeholder="Сумма">
+            </div>
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="paymentMethod">
+                Фин. поток
+              </label>
+              <div class="relative">
+                <select name="paymentMethod" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="paymentMethod">
+                  <option>Наличные</option>
+                  <option>Карта ООО М-Марин Альфа 8285</option>
+                  <option>Безнал ООО М-Марин</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="department">
+                Глобальная статья
+              </label>
+              <div class="relative">
+                <select name="department" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="department">
+                  <option>БАЗА/ Расходы на обслуживание, содержание, ремонт плавательных средств</option>
+                  <option>111</option>
+                  <option>222</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="purpose">
+                Статья расхода
+              </label>
+              <div class="relative">
+                <select name="purpose" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="purpose">
+                  <option>Инструменты, техника ,расходные материалы</option>
+                  <option>Логистика</option>
+                  <option>ТО и Сезонное обслуживание</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Кто внёс
+              </label>
+              <div class="relative">
+                <select name="name" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="name">
+                  <option>Коля</option>
+                  <option>Даша</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="flex items-center justify-between">
+              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                Отправить
+              </button>
+            </div>
+          </form>
+          <p class="text-center text-gray-500 text-xs">
+            &copy;2025 Konstantin Kokarev
+          </p>
+        </div>
+      </div>
+
+
+
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
