@@ -4,6 +4,7 @@ export const config = {
         'common': {
             'paymentSource': 'A',
             'globalTarget': 'B',
+            'direction': 'C',
         },
         'marketing': {
             'purpose': 'E',

@@ -8,13 +8,30 @@
   </head>
   <body>
     <div id="app">
-      <div class="container h-screen mx-auto flex items-center justify-center">
+      <div class="container h-full mx-auto flex items-center justify-center">
         <div class="w-full max-w-xs">
           <form
                   class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                   action="https://script.google.com/macros/s/AKfycbxVWlAlL95CIkBJrqcjrzmFeke7FBav_0RH7UN_3t0bWa5Z0LRYOnngxNbHI9jKR_INfw/exec"
                   method="post"
           >
+
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="departmentName">
+                Отдел
+              </label>
+              <div class="relative">
+                <select name="departmentName" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="departmentName">
+                  <option disabled selected>Выберите отдел...</option>
+                  <option value="marketing">Маркетинг</option>
+                  <option value="tech">Техно</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
 
 
             <div class="mb-4">
@@ -86,9 +103,9 @@
               </label>
               <div class="relative">
                 <select name="purpose" class="block relative appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:shadow-outline" id="purpose">
-                  <option>Инструменты, техника ,расходные материалы</option>
-                  <option>Логистика</option>
-                  <option>ТО и Сезонное обслуживание</option>
+<!--                  <option>Инструменты, техника ,расходные материалы</option>-->
+<!--                  <option>Логистика</option>-->
+<!--                  <option>ТО и Сезонное обслуживание</option>-->
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>

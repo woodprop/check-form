@@ -11,8 +11,24 @@ async function getValidValues() {
 
     return data;
 }
+const inputValidValues = await getValidValues();
+console.log(inputValidValues);
 
-console.log(await getValidValues()) ;
+let selectedDepartment: string;
+const depNameInput = <HTMLInputElement>document.querySelector('#departmentName');
+depNameInput.addEventListener('change', () => {
+    console.log(depNameInput.value)
+    selectedDepartment = depNameInput.value;
 
+    const purposeInput = <HTMLInputElement>document.querySelector('#purpose');
+    purposeInput.innerHTML = '';
+    inputValidValues[selectedDepartment]['purpose'].forEach((p: string) => {
+        purposeInput.appendChild( createOption(p) );
+    });
+});
 
-
+function createOption(optionName: string): HTMLOptionElement {
+    const element = document.createElement('option');
+    element.textContent = optionName;
+    return element;
+}
