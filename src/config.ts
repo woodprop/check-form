@@ -1,5 +1,5 @@
 export const config = {
-    'url': '',
+    'url': 'https://script.google.com/macros/s/AKfycbxVWlAlL95CIkBJrqcjrzmFeke7FBav_0RH7UN_3t0bWa5Z0LRYOnngxNbHI9jKR_INfw/exec',
     'validValuesSource': {
         'common': {
             'paymentSource': 'A',
