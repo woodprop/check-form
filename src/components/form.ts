@@ -1,5 +1,6 @@
 import {config} from "../config.ts";
 import {createHTMLElement} from "../utils/helpers.ts";
+import {App} from "./app.ts";
 
 interface SelectElements {
     [key: string]: HTMLSelectElement;
@@ -30,6 +31,7 @@ export class Form {
             fieldSeller: this.createInput('seller', 'text', 'Контрагент'),
             fieldPrice: this.createInput('price', 'text', 'Сумма'),
             fieldSelectPaymentMethod: this.createDropdown('paymentMethod', 'Фин. поток'),
+            fieldSelectDirection: this.createDropdown('direction', 'Направление'),
             fieldSelectGlobalPurpose: this.createDropdown('department', 'Глобальная статья'), //ToDo переименовать
             fieldSelectPurpose: this.createDropdown('purpose', 'Статья расхода'),
             fieldSelectName: this.createDropdown('name', 'Кто внёс'),
@@ -66,6 +68,9 @@ export class Form {
         validValues['common']['globalTarget'].forEach((val: string) => {
             this.selectElements['department'].append(this.createOption(val))
         });
+        validValues['common']['direction'].forEach((val: string) => {
+            this.selectElements['direction'].append(this.createOption(val))
+        });
 
 
         validValues[selectedDepartment]['purpose'].forEach((val: string) => {
@@ -90,6 +95,9 @@ export class Form {
             });
             console.log('status', res.status)
             console.log(await res.json());
+            if (res.status === 200) {
+                this.afterSend(true);
+            }
         }
         catch (error) {
             console.log(error)
@@ -136,5 +144,26 @@ export class Form {
         element.textContent = optionName;
         element.value = value;
         return element;
+    }
+
+    afterSend(success: boolean) {
+        const app = document.querySelector('#app');
+        const wrapper = document.createElement('div');
+        wrapper.className = 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4';
+        const message = document.createElement('h3');
+        const button = document.createElement('button');
+        button.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
+        button.textContent = 'Я потратил ещё';
+        button.addEventListener('click', () => {
+            window.location.href = './';
+        })
+        if (success) {
+            message.textContent = 'Успешно внесено';
+        } else {
+
+        }
+
+        wrapper.append(message, button);
+        app.replaceChildren(wrapper);
     }
 }

@@ -25,8 +25,7 @@ export class App {
         const req = config.validValuesSource;
         const res = await fetch(config.url + `?request=${JSON.stringify(req)}`);
         const data = await res.json();
-
+        console.log(data)
         return data;
     }
-
 }
