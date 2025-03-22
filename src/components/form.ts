@@ -1,10 +1,12 @@
 import {config} from "../config.ts";
 import {createHTMLElement} from "../utils/helpers.ts";
-import {App} from "./app.ts";
+import {ValidValues} from "../utils/types.ts";
 
 interface SelectElements {
     [key: string]: HTMLSelectElement;
 }
+
+type ConfigSheets = keyof typeof config.sheets;
 
 export class Form {
     public el: HTMLFormElement;
@@ -29,7 +31,7 @@ export class Form {
             fieldDate: this.createInput('date', 'date', 'Дата'),
             fieldDescription: this.createInput('description', 'text', 'Описание'),
             fieldSeller: this.createInput('seller', 'text', 'Контрагент'),
-            fieldPrice: this.createInput('price', 'text', 'Сумма'),
+            fieldPrice: this.createInput('price', 'number', 'Сумма'),
             fieldSelectPaymentMethod: this.createDropdown('paymentMethod', 'Фин. поток'),
             fieldSelectDirection: this.createDropdown('direction', 'Направление'),
             fieldSelectGlobalPurpose: this.createDropdown('department', 'Глобальная статья'), //ToDo переименовать
@@ -43,6 +45,10 @@ export class Form {
             this.createOption('Выберите отдел...', ''),
             this.createOption('Техно', 'tech'),
             this.createOption('Маркетинг', 'marketing'),
+            this.createOption('Офис', 'office'),
+            this.createOption('База', 'base'),
+            this.createOption('Корпики', 'corps'),
+            this.createOption('Школа капитанов', 'school'),
         );
 
         this.el.append(this.fields.fieldSelectDepartment);
@@ -54,7 +60,7 @@ export class Form {
         this.el.append(...Object.values(this.fields));
     }
 
-    addOptions(validValues) {
+    addOptions(validValues: ValidValues) {
         const selectedDepartment = this.selectElements['departmentName'].value;
 
         this.selectElements['paymentMethod'].innerHTML = '';
@@ -82,25 +88,23 @@ export class Form {
 
     }
 
+
     async sendForm(e: Event) {
         e.preventDefault();
         const data = new FormData(this.el);
-        const sheet = this.selectElements['departmentName'].value;
+        const sheet = <ConfigSheets>this.selectElements['departmentName'].value;
         data.append('sheet', config.sheets[sheet]);
-
         try {
             const res = await fetch(config.url, {
                 method: 'POST',
                 body: data,
             });
-            console.log('status', res.status)
-            console.log(await res.json());
             if (res.status === 200) {
                 this.afterSend(true);
             }
         }
         catch (error) {
-            console.log(error)
+            this.afterSend(false);
         }
     }
 
@@ -114,6 +118,7 @@ export class Form {
         input.name = name;
         input.id = name;
         input.type = type;
+        input.required = true;
 
         wrapper.append(label, input);
         return wrapper;
@@ -147,23 +152,27 @@ export class Form {
     }
 
     afterSend(success: boolean) {
-        const app = document.querySelector('#app');
-        const wrapper = document.createElement('div');
-        wrapper.className = 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4';
-        const message = document.createElement('h3');
-        const button = document.createElement('button');
+        const app = document.querySelector('#app')!;
+        const wrapper = createHTMLElement('div');
+        wrapper.className = 'flex flex-col items-center bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4';
+        const icon = <HTMLImageElement>createHTMLElement('img', 'block mb-4');
+
+        const message = createHTMLElement('h3', 'mb-4');
+        const button = createHTMLElement('button');
         button.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
         button.textContent = 'Я потратил ещё';
         button.addEventListener('click', () => {
             window.location.href = './';
         })
         if (success) {
+            icon.src = 'icon-success.svg';
             message.textContent = 'Успешно внесено';
         } else {
-
+            icon.src = 'icon-error.svg';
+            message.textContent = 'Что-то пошло не так...\nПроверь таблицу!';
         }
 
-        wrapper.append(message, button);
-        app.replaceChildren(wrapper);
+        wrapper.append(icon, message, button);
+        if (app) app.replaceChildren(wrapper);
     }
 }

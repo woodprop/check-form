@@ -3,6 +3,10 @@ export const config = {
     sheets: {
         tech: 'Техно',
         marketing: 'Маркетинг',
+        office: 'Офис',
+        base: 'База',
+        corps: 'Корпики',
+        school: 'Школа капитанов',
     },
     validValuesSource: {
         common: {
@@ -17,6 +21,22 @@ export const config = {
         tech: {
             purpose: 'K',
             name: 'L',
-        }
+        },
+        office: {
+            purpose: 'G',
+            name: 'H',
+        },
+        base: {
+            purpose: 'I',
+            name: 'J',
+        },
+        corps: {
+            purpose: 'M',
+            name: 'N',
+        },
+        school: {
+            purpose: 'O',
+            name: 'P',
+        },
     },
 }
