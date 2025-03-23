@@ -19,9 +19,14 @@ export class App {
         loadingPlaceholder.textContent = '>>>';
         this.appContainer.prepend(loadingPlaceholder);
         this.inputValidValues = await this.getValidValues();
-        loadingPlaceholder.remove();
-        this.appContainer.prepend(this.form.el);
-        this.form.selectElements['departmentName'].addEventListener('change', this.selectDepartmentHandler.bind(this));
+        if (this.inputValidValues) {
+            loadingPlaceholder.remove();
+            this.appContainer.prepend(this.form.el);
+            this.form.selectElements['departmentName'].addEventListener('change', this.selectDepartmentHandler.bind(this));
+        } else {
+            loadingPlaceholder.textContent = '<< Error <<';
+        }
+
     }
 
     selectDepartmentHandler() {
@@ -31,10 +36,23 @@ export class App {
         }
     }
 
-    async getValidValues(): Promise<ValidValues> {
-        const req = config.validValuesSource;
-        const res = await fetch(config.url + `?request=${JSON.stringify(req)}`);
-        const data = await res.json();
-        return data;
+    async getValidValues(): Promise<ValidValues | undefined> {
+        const data = new FormData();
+        data.append('action', 'getValidValues');
+        data.append('request', JSON.stringify(config.validValuesSource));
+
+        try {
+            const res = await fetch(config.url, {
+                method: 'POST',
+                body: data,
+            });
+            if (res.status === 200) {
+                return await res.json();
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+        return;
     }
 }

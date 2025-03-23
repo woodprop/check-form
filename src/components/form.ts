@@ -94,11 +94,13 @@ export class Form {
         const data = new FormData(this.el);
         const sheet = <ConfigSheets>this.selectElements['departmentName'].value;
         data.append('sheet', config.sheets[sheet]);
+        data.append('action', 'add');
         try {
             const res = await fetch(config.url, {
                 method: 'POST',
                 body: data,
             });
+            console.log(await res.json());
             if (res.status === 200) {
                 this.afterSend(true);
             }
